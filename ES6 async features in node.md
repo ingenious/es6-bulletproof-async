@@ -21,7 +21,7 @@ Since Sept 2015 native Promises were added to nodeJS.  Since then there has been
 
 This basic pattern converts a function with callback to a promise:
 
-```javscript
+```javascript
                                                                   
    new Promise((resolve, reject) => {
       fs.readFile(
@@ -101,7 +101,8 @@ In many cases you may just log the error as in 99.9..% of cases no error will be
 
 #### 2.2.1 Simplest Case of ES6 class with async method
 
-```
+```javascript
+                                                           
 // simplest ES6 class with async method
 let testClass = class {
   async test() {
@@ -184,7 +185,7 @@ A function with callback soap.createClient is wrapped in a promise and the promi
 Errors thrown in  Promise bodies are generally trapped by the Promise and will appear in the catch method at the end of the promise chain.  This isn't the case for some callback funtions occuring in the Promise body (see next item)
 
 
-```
+```javascript
 
 let soap = require('strong-soap').soap
 module.exports = function(wsdl, options) {
