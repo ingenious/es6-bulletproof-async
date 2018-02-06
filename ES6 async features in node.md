@@ -3,14 +3,14 @@
 > Using ES6 features in NodeJS ver 7.6 and above to create ***bulletproof*** asynchronous processes
 >
 
-Code samples form this document are available here [es6 async tips examples](https://github.com/ingenious/es6-bulletproof-async/blob/master/es6AsyncTipsExamples.js)
+Code samples from this document are available here [es6 async tips examples](https://github.com/ingenious/es6-bulletproof-async/blob/master/es6AsyncTipsExamples.js)
 
 Fully working code example is available: [Accounts List demo](https://github.com/ingenious/es6-bulletproof-async) described here: [Install and run](https://github.com/ingenious/es6-bulletproof-async/blob/master/README.md)
 
 ### 1. Brief history of asynchronous processes in nodeJS
 
 ### 1.1 The birth of callbacks
-To handle io processes which require the main javscript thread to wait, NodeJS was built around [**libuv**](https://nikhilm.github.io/uvbook/basics.html).  When any request for resource is made, it is placed in a queue of callbacks.  So many node functions use callbacks and as a result many packages also use callback functions to handle asynchronous processes.
+To handle **io** processes which require the main javascript thread to wait, NodeJS was built around [**libuv**](https://nikhilm.github.io/uvbook/basics.html).  When any request for resource is made, it is placed in a queue of callbacks.  Many native node functions eg **fs** use callbacks and as a result many packages also use callback functions to handle asynchronous processes.
 
 As typical asynchronous code got more complex problems arose.  Callbacks lead to many levels of idented steps which is difficult to read/understand/debug and if the err argument isn't handled properly it can easy lead to the asynchronous process landing in 'limbo' which only becomes apparant once an unususual error off the 'sweet path' occurs.  These issues of indeting and limbo errors apply even if packages such as **async** are used to create waterfall patterns etc
 
