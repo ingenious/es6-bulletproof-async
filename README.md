@@ -1,13 +1,14 @@
 # es6-bulletproof-async 
 
 > * A set of model code and examples that illustrates the **es6-bulletproof** pattern
-> * A set of tips and techniques for coding asynchronous processes in ES^ Javascript so that
+> * A set of tips and techniques for coding asynchronous processes in ES6 Javascript so that
 > * Indenting is eliminated and 
-> * error handling always conducts errors to the final .catch() in a Promise chain
+> * error handling always conducts errors to the final **.catch()** in a Promise chain
 
-The pattern is explained in this document
 
-[ES6 async features in Node](https://github.com/ingenious/es6-bulletproof-async/blob/master/ES6%20async%20features%20in%20node.md)
+Some code samples are available here [es6 async tips examples](https://github.com/ingenious/es6-bulletproof-async/blob/master/es6AsyncTipsExamples.js)
+
+Fully working code example is available: [Accounts List demo](https://github.com/ingenious/es6-bulletproof-async) described here: [Install and run](https://github.com/ingenious/es6-bulletproof-async/blob/master/README.md)
 
 ## Install model code
 
@@ -91,3 +92,31 @@ Response:
 
 
 ```
+
+##  Creating ES6 'Bulletproof' asynchronous processes
+###  Overview of pattern
+
+1.  Have each step of the return a promise  (facilitates unit testing and sharing)
+
+2.  Wrap legacy callback handlers in Promise bodies in **try { .. } catch(e){ resolve(e) }**
+
+3.  Add each step as an **async** method of a 'steps' class
+
+4.  Add a final method which has the sequence logic laid out with **await** statements 
+
+5.  Return a Promise in **.then()** or **catch()** steps of a chain to ensure errors are passed down the chain 
+
+### Benefits of pattern
+
+1.  Syntax or processing errors are passed down the chain to be handled at the end of the chain
+
+2.  By using class structures, data can be passed or cumulated through Promise chains in the **this** of  the newed class
+
+2.  Promises, functions, generators and static method can be mixed in the same structure
+
+3.  **await** keyword allows linear sequences of async processes without need for indenting
+
+4.  Code has enhanced readability
+
+The pattern is fully explained in this document:   [ES6 async features in Node](https://github.com/ingenious/es6-bulletproof-async/blob/master/ES6%20async%20features%20in%20node.md)
+
