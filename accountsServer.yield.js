@@ -1,7 +1,9 @@
 'use strict'
 
+let am = require('async-methods')
 let join = require('path').join
 let fs = require('fs')
+
 let createServerHelper = require('./helpers/createServer')
 let createSoapServerHelper = require('./helpers/createSoapServer')
 let SoapService = class {
@@ -17,15 +19,17 @@ let SoapService = class {
     let self = this
     return createServerHelper.apply(self, arguments)
   }
-  
+
   createSoapServer () {
     let self = this
     return createSoapServerHelper.apply(self, arguments)
   }
-  async startServer () {
+  startServer () {
     let self = this
-    await self.createServer(5089)
-    await self.createSoapServer()
+    return am(function * () {
+      yield self.createServer(5089)
+      yield self.createSoapServer()
+    })
   }
 }
 

@@ -30,25 +30,27 @@ let SoapRequestSteps = class {
 
     /* Using async allows a sequence of asynchronous steps to be followed
        without indenting */
-  async getAccountsList (customerId) {
+  getAccountsList (customerId) {
     let self = this
+    return am(function * () {
 
       //  async step
-    let xml = await self.makeSoapRequest('GetAccountsList', {
-      AccountsRequest: { customerId: customerId }
-    })
-    self.responseBody = xml
+      let xml = yield self.makeSoapRequest('GetAccountsList', {
+        AccountsRequest: { customerId: customerId }
+      })
+      self.responseBody = xml
 
       // async step
-    let json = await convertXMLToJSON(xml)
+      let json = yield convertXMLToJSON(xml)
 
       // sync step
-    return trimAccountsList(customerId, json)
+      return trimAccountsList(customerId, json)
+    })
   }
   logExchange () {
     console.log('Request:\n', this.requestBody, '\n\nResponse:\n', this.responseBody)
   }
-}
+  }
 
 let soapClient = new SoapRequestSteps('http://127.0.0.1:5089/accountsList?WSDL', {
   // SOAP options
