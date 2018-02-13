@@ -3,7 +3,7 @@
 let customerId = process.argv[2] || '23456789';
 
 // soap client
-let am = require('async-methods');
+
 let makeSoapRequest = require('./helpers/makeSoapRequest');
 let convertXMLToJSON = require('./helpers/convertXMLToJSON');
 let createSOAPClient = require('./helpers/createSOAPClient');
@@ -17,15 +17,13 @@ let SoapRequestSteps = class {
   createSOAPClient (wsdl, options) {
     return createSOAPClient.apply(this, arguments);
   }
-  makeSoapRequest (method, params) {
+  async makeSoapRequest (method, params) {
     let self = this;
     let args = arguments;
-    /*
-       make sure the client has been created  */
-    return am(function * () {
-      self.soapClient = yield self.clientReady;
-      return makeSoapRequest.apply(self, args);
-    });
+
+    // make sure the client has been created
+    self.soapClient = await self.clientReady;
+    return makeSoapRequest.apply(self, args);
   }
 
   /* Using async allows a sequence of asynchronous steps to be followed
