@@ -1,26 +1,26 @@
-let http = require('http')
+let http = require('http');
 
-module.exports = function(port) {
-  let self = this
+module.exports = function (port) {
+  let self = this;
   try {
-    self.server = http.createServer(function(req, res) {
-      res.statusCode = 404
-      res.end()
-    })
+    self.server = http.createServer(function (req, res) {
+      res.statusCode = 404;
+      res.end();
+    });
   } catch (e) {
-    throw 'unable to create server'
+    throw Error('unable to create server');
   }
-  return new Promise((resolve, request) => {
-    self.server.listen(port, null, null, function(err, result) {
+  return new Promise((resolve, reject) => {
+    self.server.listen(port, null, null, function (err, result) {
       try {
         if (err) {
-          reject(err)
+          reject(err);
         } else {
-          resolve(result)
+          resolve(result);
         }
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
-  })
-}
+    });
+  });
+};

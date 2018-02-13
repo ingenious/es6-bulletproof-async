@@ -26,8 +26,8 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/franklinfrench/loopback-soap#readme",
   "devDependencies": {
+    "async-methods": "ingenious/async-methods",
     "chai": "^4.1.2",
-    "mocha": "^5.0.0",
-    "async-methods": "ingenious/async-methods"
+    "mocha": "^5.0.0"
   }
 }
